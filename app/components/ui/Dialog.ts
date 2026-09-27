@@ -1,1 +1,1 @@
-export * from '../modals/Dialog';
+export * from '~/components/modals/Dialog';

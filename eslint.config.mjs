@@ -32,6 +32,14 @@ export default [
     },
   },
   {
+    // Schema/definition modules export their values in PascalCase (`UserIdSchema`, `BrandedIds`),
+    // so they need the same exemption the config already gives PascalCase values in `.tsx` files.
+    files: ['app/schemas/**/*.ts', 'app/types/**/*.ts'],
+    rules: {
+      ...getNamingConventionRule({}, true),
+    },
+  },
+  {
     files: ['**/*.d.ts'],
     rules: {
       '@typescript-eslint/no-empty-object-type': 'off',

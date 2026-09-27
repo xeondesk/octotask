@@ -1,1 +1,1 @@
-export * from '../common/Progress';
+export * from '~/components/common/Progress';

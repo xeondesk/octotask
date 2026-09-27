@@ -1,1 +1,1 @@
-export * from '../common/Separator';
+export * from '~/components/common/Separator';

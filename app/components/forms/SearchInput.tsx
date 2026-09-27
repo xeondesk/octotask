@@ -1,6 +1,6 @@
 import React, { forwardRef } from 'react';
 import { classNames } from '~/utils/classNames';
-import { Input } from '../forms/Input';
+import { Input } from '~/components/forms/Input';
 import { motion, AnimatePresence } from 'framer-motion';
 
 interface SearchInputProps extends React.InputHTMLAttributes<HTMLInputElement> {

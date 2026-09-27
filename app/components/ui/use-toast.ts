@@ -1,1 +1,1 @@
-export * from '../common/use-toast';
+export * from '~/components/common/use-toast';

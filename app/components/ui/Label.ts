@@ -1,1 +1,1 @@
-export * from '../forms/Label';
+export * from '~/components/forms/Label';

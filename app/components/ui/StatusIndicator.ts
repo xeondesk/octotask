@@ -1,1 +1,1 @@
-export * from '../common/StatusIndicator';
+export * from '~/components/common/StatusIndicator';

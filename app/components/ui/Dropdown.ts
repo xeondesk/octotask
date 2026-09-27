@@ -1,1 +1,1 @@
-export * from '../modals/Dropdown';
+export * from '~/components/modals/Dropdown';

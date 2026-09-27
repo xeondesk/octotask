@@ -1,1 +1,1 @@
-export * from '../layout/Collapsible';
+export * from '~/components/layout/Collapsible';

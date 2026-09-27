@@ -1,1 +1,1 @@
-export * from '../layout/PanelHeaderButton';
+export * from '~/components/layout/PanelHeaderButton';

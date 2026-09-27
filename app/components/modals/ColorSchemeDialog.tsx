@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from 'react';
-import { Dialog, DialogTitle, DialogDescription, DialogRoot } from '../modals/Dialog';
-import { Button } from '../common/Button';
-import { IconButton } from '../common/IconButton';
+import { Dialog, DialogTitle, DialogDescription, DialogRoot } from '~/components/modals/Dialog';
+import { Button } from '~/components/common/Button';
+import { IconButton } from '~/components/common/IconButton';
 import type { DesignScheme } from '~/types/design-scheme';
 import { defaultDesignScheme, designFeatures, designFonts, paletteRoles } from '~/types/design-scheme';
 

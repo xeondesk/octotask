@@ -1,1 +1,1 @@
-export * from '../forms/SearchInput';
+export * from '~/components/forms/SearchInput';

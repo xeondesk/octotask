@@ -1,1 +1,1 @@
-export * from '../common/IconButton';
+export * from '~/components/common/IconButton';

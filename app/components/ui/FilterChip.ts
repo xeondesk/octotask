@@ -1,1 +1,1 @@
-export * from '../forms/FilterChip';
+export * from '~/components/forms/FilterChip';

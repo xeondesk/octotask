@@ -1,1 +1,1 @@
-export * from '../forms/Slider';
+export * from '~/components/forms/Slider';

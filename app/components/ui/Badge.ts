@@ -1,1 +1,1 @@
-export * from '../common/Badge';
+export * from '~/components/common/Badge';

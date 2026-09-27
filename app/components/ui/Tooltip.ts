@@ -1,2 +1,2 @@
-export * from '../common/Tooltip';
-export { default } from '../common/Tooltip';
+export * from '~/components/common/Tooltip';
+export { default } from '~/components/common/Tooltip';

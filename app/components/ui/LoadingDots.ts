@@ -1,1 +1,1 @@
-export * from '../common/LoadingDots';
+export * from '~/components/common/LoadingDots';

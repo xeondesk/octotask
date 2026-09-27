@@ -1,1 +1,1 @@
-export * from '../modals/ColorSchemeDialog';
+export * from '~/components/modals/ColorSchemeDialog';

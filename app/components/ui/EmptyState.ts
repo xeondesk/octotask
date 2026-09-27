@@ -1,1 +1,1 @@
-export * from '../common/EmptyState';
+export * from '~/components/common/EmptyState';

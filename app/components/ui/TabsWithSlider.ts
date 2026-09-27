@@ -1,1 +1,1 @@
-export * from '../layout/TabsWithSlider';
+export * from '~/components/layout/TabsWithSlider';

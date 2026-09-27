@@ -51,6 +51,7 @@ export const APIKeyManager: React.FC<APIKeyManagerProps> = ({ provider, apiKey, 
   const checkEnvApiKey = useCallback(async () => {
     // Check cache first
     const cached = providerEnvKeyStatusCache[provider.name];
+
     if (cached !== undefined) {
       setIsEnvKeySet(cached);
       return;

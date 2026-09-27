@@ -1,5 +1,5 @@
 import React from 'react';
-import { Badge } from '../common/Badge';
+import { Badge } from '~/components/common/Badge';
 import { classNames } from '~/utils/classNames';
 import { formatSize } from '~/utils/formatSize';
 

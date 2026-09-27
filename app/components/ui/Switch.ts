@@ -1,1 +1,1 @@
-export * from '../forms/Switch';
+export * from '~/components/forms/Switch';

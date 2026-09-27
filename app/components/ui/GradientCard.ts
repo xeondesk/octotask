@@ -1,1 +1,1 @@
-export * from '../common/GradientCard';
+export * from '~/components/common/GradientCard';

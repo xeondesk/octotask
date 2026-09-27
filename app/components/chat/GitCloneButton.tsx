@@ -75,9 +75,11 @@ export default function GitCloneButton({ importChat, className }: GitCloneButton
 
         for (const filePath of filePaths) {
           const fileData = data[filePath];
+
           if (!fileData) {
             continue;
           }
+
           const { data: content, encoding } = fileData;
 
           // Skip binary files

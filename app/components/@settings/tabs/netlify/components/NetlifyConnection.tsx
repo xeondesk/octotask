@@ -478,6 +478,7 @@ export default function NetlifyConnection() {
       let lastDeployTime = '';
 
       const firstSite = sitesData[0];
+
       if (firstSite) {
         // Fetch deploys
         const deploysResponse = await fetch(`https://api.netlify.com/api/v1/sites/${firstSite.id}/deploys`, {
@@ -493,6 +494,7 @@ export default function NetlifyConnection() {
 
           // Get the latest deploy time
           const latestDeploy = deploysData[0];
+
           if (latestDeploy) {
             lastDeployTime = latestDeploy.created_at;
             setLastUpdated(lastDeployTime);

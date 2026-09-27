@@ -1,1 +1,1 @@
-export * from '../common/FileIcon';
+export * from '~/components/common/FileIcon';

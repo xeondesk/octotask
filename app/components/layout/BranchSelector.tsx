@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
-import { Button } from '../common/Button';
+import { Button } from '~/components/common/Button';
 import { classNames } from '~/utils/classNames';
 import { GitBranch, Check, Shield, Star, RefreshCw, X } from 'lucide-react';
 

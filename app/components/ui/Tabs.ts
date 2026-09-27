@@ -1,1 +1,1 @@
-export * from '../layout/Tabs';
+export * from '~/components/layout/Tabs';

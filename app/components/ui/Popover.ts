@@ -1,2 +1,2 @@
-export * from '../modals/Popover';
-export { default } from '../modals/Popover';
+export * from '~/components/modals/Popover';
+export { default } from '~/components/modals/Popover';

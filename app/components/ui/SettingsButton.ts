@@ -1,1 +1,1 @@
-export * from '../common/SettingsButton';
+export * from '~/components/common/SettingsButton';

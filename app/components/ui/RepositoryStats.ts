@@ -1,1 +1,1 @@
-export * from '../layout/RepositoryStats';
+export * from '~/components/layout/RepositoryStats';

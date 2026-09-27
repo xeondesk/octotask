@@ -20,25 +20,10 @@ export const SecretIdSchema = z.string().uuid().brand<'SecretId'>();
 export const TokenIdSchema = z.string().uuid().brand<'TokenId'>();
 export const ConnectionIdSchema = z.string().uuid().brand<'ConnectionId'>();
 
-export type UserId = z.infer<typeof UserIdSchema>;
-export type ProjectId = z.infer<typeof ProjectIdSchema>;
-export type SessionId = z.infer<typeof SessionIdSchema>;
-export type WorkspaceId = z.infer<typeof WorkspaceIdSchema>;
-export type FileId = z.infer<typeof FileIdSchema>;
-export type ChatId = z.infer<typeof ChatIdSchema>;
-export type MessageId = z.infer<typeof MessageIdSchema>;
-export type ArtifactId = z.infer<typeof ArtifactIdSchema>;
-export type BranchId = z.infer<typeof BranchIdSchema>;
-export type CommitId = z.infer<typeof CommitIdSchema>;
-export type RepositoryId = z.infer<typeof RepositoryIdSchema>;
-export type ProviderId = z.infer<typeof ProviderIdSchema>;
-export type ModelId = z.infer<typeof ModelIdSchema>;
-export type DeploymentId = z.infer<typeof DeploymentIdSchema>;
-export type BuildId = z.infer<typeof BuildIdSchema>;
-export type TemplateId = z.infer<typeof TemplateIdSchema>;
-export type SecretId = z.infer<typeof SecretIdSchema>;
-export type TokenId = z.infer<typeof TokenIdSchema>;
-export type ConnectionId = z.infer<typeof ConnectionIdSchema>;
+/*
+ * The branded id *types* live in `app/types/branded.ts`; re-declaring them here
+ * would make `app/types/index.ts` (which re-exports both modules) ambiguous.
+ */
 
 export const TimestampSchema = z.number().int().positive();
 
@@ -62,11 +47,13 @@ export const ProjectSchema = BaseEntitySchema.extend({
   description: z.string().max(1000).optional(),
   ownerId: UserIdSchema,
   workspaceId: WorkspaceIdSchema,
-  gitRepository: z.object({
-    url: z.string().url(),
-    branch: z.string().default('main'),
-    provider: z.enum(['github', 'gitlab']),
-  }).optional(),
+  gitRepository: z
+    .object({
+      url: z.string().url(),
+      branch: z.string().default('main'),
+      provider: z.enum(['github', 'gitlab']),
+    })
+    .optional(),
   settings: z.record(z.unknown()).default({}),
 });
 
@@ -74,10 +61,14 @@ export const WorkspaceSchema = BaseEntitySchema.extend({
   id: WorkspaceIdSchema,
   name: z.string().min(1).max(100),
   ownerId: UserIdSchema,
-  members: z.array(z.object({
-    userId: UserIdSchema,
-    role: z.enum(['owner', 'admin', 'member', 'viewer']),
-  })).default([]),
+  members: z
+    .array(
+      z.object({
+        userId: UserIdSchema,
+        role: z.enum(['owner', 'admin', 'member', 'viewer']),
+      }),
+    )
+    .default([]),
   settings: z.record(z.unknown()).default({}),
 });
 
@@ -110,18 +101,26 @@ export const MessageSchema = BaseEntitySchema.extend({
   chatId: ChatIdSchema,
   role: z.enum(['user', 'assistant', 'system', 'tool']),
   content: z.string(),
-  artifacts: z.array(z.object({
-    id: ArtifactIdSchema,
-    type: z.enum(['code', 'file', 'image', 'link']),
-    title: z.string(),
-    content: z.string(),
-    language: z.string().optional(),
-  })).default([]),
-  toolCalls: z.array(z.object({
-    id: z.string(),
-    name: z.string(),
-    arguments: z.record(z.unknown()),
-  })).default([]),
+  artifacts: z
+    .array(
+      z.object({
+        id: ArtifactIdSchema,
+        type: z.enum(['code', 'file', 'image', 'link']),
+        title: z.string(),
+        content: z.string(),
+        language: z.string().optional(),
+      }),
+    )
+    .default([]),
+  toolCalls: z
+    .array(
+      z.object({
+        id: z.string(),
+        name: z.string(),
+        arguments: z.record(z.unknown()),
+      }),
+    )
+    .default([]),
   metadata: z.record(z.unknown()).default({}),
 });
 
@@ -135,17 +134,6 @@ export const ArtifactSchema = BaseEntitySchema.extend({
   metadata: z.record(z.unknown()).default({}),
 });
 
-export const ProviderSchema = BaseEntitySchema.extend({
-  id: ProviderIdSchema,
-  name: z.string().min(1),
-  type: z.enum(['openai', 'anthropic', 'deepseek', 'groq', 'ollama', 'openrouter', 'cerebras', 'fireworks', 'mistral', 'cohere', 'bedrock', 'google']),
-  apiKey: z.string().optional(),
-  baseUrl: z.string().url().optional(),
-  isEnabled: z.boolean().default(true),
-  priority: z.number().int().default(0),
-  models: z.array(ModelSchema).default([]),
-});
-
 export const ModelSchema = BaseEntitySchema.extend({
   id: ModelIdSchema,
   providerId: ProviderIdSchema,
@@ -155,10 +143,36 @@ export const ModelSchema = BaseEntitySchema.extend({
   maxOutputTokens: z.number().int().positive(),
   supportsTools: z.boolean().default(false),
   supportsVision: z.boolean().default(false),
-  pricing: z.object({
-    input: z.number().nonnegative(),
-    output: z.number().nonnegative(),
-  }).optional(),
+  pricing: z
+    .object({
+      input: z.number().nonnegative(),
+      output: z.number().nonnegative(),
+    })
+    .optional(),
+});
+
+export const ProviderSchema = BaseEntitySchema.extend({
+  id: ProviderIdSchema,
+  name: z.string().min(1),
+  type: z.enum([
+    'openai',
+    'anthropic',
+    'deepseek',
+    'groq',
+    'ollama',
+    'openrouter',
+    'cerebras',
+    'fireworks',
+    'mistral',
+    'cohere',
+    'bedrock',
+    'google',
+  ]),
+  apiKey: z.string().optional(),
+  baseUrl: z.string().url().optional(),
+  isEnabled: z.boolean().default(true),
+  priority: z.number().int().default(0),
+  models: z.array(ModelSchema).default([]),
 });
 
 export const DeploymentSchema = BaseEntitySchema.extend({
@@ -198,12 +212,14 @@ export const GitBranchSchema = z.object({
   repositoryId: RepositoryIdSchema,
   name: z.string().min(1),
   isDefault: z.boolean().default(false),
-  lastCommit: z.object({
-    id: CommitIdSchema,
-    message: z.string(),
-    author: z.string(),
-    timestamp: TimestampSchema,
-  }).optional(),
+  lastCommit: z
+    .object({
+      id: CommitIdSchema,
+      message: z.string(),
+      author: z.string(),
+      timestamp: TimestampSchema,
+    })
+    .optional(),
 });
 
 export const GitCommitSchema = z.object({
@@ -260,15 +276,19 @@ export const ApiResponseSchema = <T extends z.ZodTypeAny>(dataSchema: T) =>
   z.object({
     success: z.boolean(),
     data: dataSchema.optional(),
-    error: z.object({
-      code: z.string(),
-      message: z.string(),
-      details: z.record(z.unknown()).optional(),
-    }).optional(),
-    meta: z.object({
-      timestamp: TimestampSchema,
-      requestId: z.string().uuid(),
-    }).optional(),
+    error: z
+      .object({
+        code: z.string(),
+        message: z.string(),
+        details: z.record(z.unknown()).optional(),
+      })
+      .optional(),
+    meta: z
+      .object({
+        timestamp: TimestampSchema,
+        requestId: z.string().uuid(),
+      })
+      .optional(),
   });
 
 export const PaginatedResponseSchema = <T extends z.ZodTypeAny>(itemSchema: T) =>
@@ -290,26 +310,36 @@ export const WebSocketMessageSchema = z.object({
 export const AiModelRequestSchema = z.object({
   modelId: ModelIdSchema,
   providerId: ProviderIdSchema,
-  messages: z.array(z.object({
-    role: z.enum(['user', 'assistant', 'system', 'tool']),
-    content: z.string(),
-    toolCalls: z.array(z.object({
-      id: z.string(),
-      name: z.string(),
-      arguments: z.record(z.unknown()),
-    })).optional(),
-    toolCallId: z.string().optional(),
-  })),
+  messages: z.array(
+    z.object({
+      role: z.enum(['user', 'assistant', 'system', 'tool']),
+      content: z.string(),
+      toolCalls: z
+        .array(
+          z.object({
+            id: z.string(),
+            name: z.string(),
+            arguments: z.record(z.unknown()),
+          }),
+        )
+        .optional(),
+      toolCallId: z.string().optional(),
+    }),
+  ),
   temperature: z.number().min(0).max(2).default(0.7),
   maxTokens: z.number().int().positive().optional(),
-  tools: z.array(z.object({
-    type: z.literal('function'),
-    function: z.object({
-      name: z.string(),
-      description: z.string(),
-      parameters: z.record(z.unknown()),
-    }),
-  })).optional(),
+  tools: z
+    .array(
+      z.object({
+        type: z.literal('function'),
+        function: z.object({
+          name: z.string(),
+          description: z.string(),
+          parameters: z.record(z.unknown()),
+        }),
+      }),
+    )
+    .optional(),
   stream: z.boolean().default(false),
 });
 
@@ -317,27 +347,35 @@ export const AiModelResponseSchema = z.object({
   id: z.string(),
   modelId: ModelIdSchema,
   providerId: ProviderIdSchema,
-  choices: z.array(z.object({
-    index: z.number().int().nonnegative(),
-    message: z.object({
-      role: z.enum(['assistant']),
-      content: z.string().nullable(),
-      toolCalls: z.array(z.object({
-        id: z.string(),
-        type: z.literal('function'),
-        function: z.object({
-          name: z.string(),
-          arguments: z.string(),
-        }),
-      })).optional(),
+  choices: z.array(
+    z.object({
+      index: z.number().int().nonnegative(),
+      message: z.object({
+        role: z.enum(['assistant']),
+        content: z.string().nullable(),
+        toolCalls: z
+          .array(
+            z.object({
+              id: z.string(),
+              type: z.literal('function'),
+              function: z.object({
+                name: z.string(),
+                arguments: z.string(),
+              }),
+            }),
+          )
+          .optional(),
+      }),
+      finishReason: z.enum(['stop', 'length', 'tool_calls', 'content_filter', 'null']),
     }),
-    finishReason: z.enum(['stop', 'length', 'tool_calls', 'content_filter', 'null']),
-  })),
-  usage: z.object({
-    promptTokens: z.number().int().nonnegative(),
-    completionTokens: z.number().int().nonnegative(),
-    totalTokens: z.number().int().nonnegative(),
-  }).optional(),
+  ),
+  usage: z
+    .object({
+      promptTokens: z.number().int().nonnegative(),
+      completionTokens: z.number().int().nonnegative(),
+      totalTokens: z.number().int().nonnegative(),
+    })
+    .optional(),
   created: TimestampSchema,
 });
 
@@ -368,12 +406,14 @@ export function validateEnv(env: Record<string, string | undefined>) {
 
 export function validateApiResponse<T extends z.ZodTypeAny>(
   response: unknown,
-  dataSchema: T
+  dataSchema: T,
 ): { success: true; data: z.infer<T> } | { success: false; error: z.ZodError } {
   const result = ApiResponseSchema(dataSchema).safeParse(response);
+
   if (result.success) {
     return { success: true, data: result.data.data as z.infer<T> };
   }
+
   return { success: false, error: result.error };
 }
 

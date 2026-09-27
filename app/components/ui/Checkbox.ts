@@ -1,1 +1,1 @@
-export * from '../forms/Checkbox';
+export * from '~/components/forms/Checkbox';

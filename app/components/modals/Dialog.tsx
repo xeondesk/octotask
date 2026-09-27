@@ -3,11 +3,11 @@ import { motion, type Variants } from 'framer-motion';
 import React, { memo, type ReactNode, useState, useEffect } from 'react';
 import { classNames } from '~/utils/classNames';
 import { cubicEasingFn } from '~/utils/easings';
-import { IconButton } from '../common/IconButton';
-import { Button } from '../common/Button';
+import { IconButton } from '~/components/common/IconButton';
+import { Button } from '~/components/common/Button';
 import { FixedSizeList } from 'react-window';
-import { Checkbox } from '../forms/Checkbox';
-import { Label } from '../forms/Label';
+import { Checkbox } from '~/components/forms/Checkbox';
+import { Label } from '~/components/forms/Label';
 
 export { Close as DialogClose, Root as DialogRoot } from '@radix-ui/react-dialog';
 

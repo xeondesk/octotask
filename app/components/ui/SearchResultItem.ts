@@ -1,1 +1,1 @@
-export * from '../common/SearchResultItem';
+export * from '~/components/common/SearchResultItem';

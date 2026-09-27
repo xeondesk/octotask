@@ -1,1 +1,1 @@
-export * from '../common/LoadingOverlay';
+export * from '~/components/common/LoadingOverlay';

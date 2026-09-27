@@ -1,1 +1,1 @@
-export * from '../common/CodeBlock';
+export * from '~/components/common/CodeBlock';

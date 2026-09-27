@@ -1,1 +1,1 @@
-export * from '../layout/BranchSelector';
+export * from '~/components/layout/BranchSelector';

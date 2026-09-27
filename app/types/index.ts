@@ -1,2 +1,2 @@
 export * from './branded';
-export * from '../schemas';
+export * from '~/schemas';

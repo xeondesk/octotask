@@ -19,6 +19,7 @@ const levenshteinDistance = (str1: string, str2: string): number => {
 
   for (let i = 1; i <= str2.length; i++) {
     matrix[i] ??= [];
+
     for (let j = 1; j <= str1.length; j++) {
       if (str2.charAt(i - 1) === str1.charAt(j - 1)) {
         matrix[i][j] = matrix[i - 1]?.[j - 1] ?? 0;

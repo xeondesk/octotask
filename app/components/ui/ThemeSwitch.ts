@@ -1,1 +1,1 @@
-export * from '../common/ThemeSwitch';
+export * from '~/components/common/ThemeSwitch';

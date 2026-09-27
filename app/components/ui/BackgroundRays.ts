@@ -1,1 +1,2 @@
-export { default } from '../common/BackgroundRays'; export * from '../common/BackgroundRays';
+export { default } from '~/components/common/BackgroundRays';
+export * from '~/components/common/BackgroundRays';

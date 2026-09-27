@@ -1,1 +1,1 @@
-export * from '../common/ScrollArea';
+export * from '~/components/common/ScrollArea';

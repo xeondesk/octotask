@@ -1,1 +1,1 @@
-export * from '../common/GlowingEffect';
+export * from '~/components/common/GlowingEffect';

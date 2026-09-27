@@ -1,1 +1,1 @@
-export * from '../common/CloseButton';
+export * from '~/components/common/CloseButton';

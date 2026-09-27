@@ -1,4 +1,4 @@
-export type Brand<T, TBrand> = T & { readonly __brand: unique symbol };
+export type Brand<T, TBrand> = T & { readonly __brand: TBrand };
 
 export function createBrand<T, TBrand>(value: T): Brand<T, TBrand> {
   return value as Brand<T, TBrand>;
