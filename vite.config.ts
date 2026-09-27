@@ -44,6 +44,22 @@ export default defineConfig((config) => {
           return null;
         },
       },
+      {
+        name: 'replaceReactDomServerImport',
+        enforce: 'pre',
+        transform(code: string, id: string) {
+          /*
+           * entry.server.tsx uses renderToReadableStream, which only exists in the
+           * webstream build of react-dom/server. Node (Vercel) resolves the default
+           * condition and gets the node build, which lacks that export.
+           */
+          if (id.endsWith('entry.server.tsx')) {
+            return code.replace(/from 'react-dom\/server';?/g, "from 'react-dom/server.browser';");
+          }
+
+          return undefined;
+        },
+      },
       config.mode !== 'test' && remixCloudflareDevProxy(),
       remixVitePlugin({
         future: {
